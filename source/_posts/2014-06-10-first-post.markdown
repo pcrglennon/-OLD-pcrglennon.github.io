@@ -7,3 +7,9 @@ categories: "Flatiron&nbsp;School"
 ---
 
 Hello World
+
+Temp links >>
+
+http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash
+
+http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash

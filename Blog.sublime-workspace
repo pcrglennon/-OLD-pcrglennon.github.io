@@ -1,0 +1,610 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"son",
+				"songs_by_artist"
+			],
+			[
+				"ea",
+				"ea	each { |e| .. }"
+			],
+			[
+				"prom",
+				"prompt_username_hostname"
+			],
+			[
+				"sub",
+				"substitutions"
+			],
+			[
+				"co",
+				"collect  (function)"
+			],
+			[
+				"holid",
+				"holiday_supplies"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/pglennon/flatiron/week_2/green_grocer-ruby-005/spec/grocer_spec.rb",
+			"settings":
+			{
+				"buffer_size": 3750,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"dsiab",
+				"Package Control: Disable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"package",
+				"Package Control: Disable Package"
+			],
+			[
+				"enab",
+				"Package Control: Enable Package"
+			],
+			[
+				"extract",
+				"PackageResourceViewer: Extract Package"
+			],
+			[
+				"Dis",
+				"Package Control: Disable Package"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/pglennon/flatiron/octopress/_config.yml",
+		"/Users/pglennon/flatiron/week_2/collections_practice-ruby-005/spec/collections_practice_spec.rb",
+		"/Users/pglennon/flatiron/week_2/collections_practice-ruby-005/collections_practice.rb",
+		"/Users/pglennon/flatiron/week_2/green_grocer-ruby-005/grocer.rb",
+		"/Users/pglennon/flatiron/week_2/green_grocer-ruby-005/random_grocery_generator.rb",
+		"/Users/pglennon/flatiron/week_2/regex_rally-ruby-005/spec/regex_rally_spec.rb",
+		"/Users/pglennon/flatiron/week_2/find-hashtags-ruby-005/spec/find_hashtag_spec.rb",
+		"/Users/pglennon/flatiron/week_2/find-hashtags-ruby-005/find_hashtag.rb",
+		"/Users/pglennon/flatiron/week_2/find-hashtags-ruby-005/README.md",
+		"/Users/pglennon/flatiron/week_2/nyc-pigeon-organizer-ruby-005/nyc_pigeon_organizer.rb",
+		"/Users/pglennon/flatiron/week_2/nyc-pigeon-organizer-ruby-005/spec/nyc_pigeon_organizer_spec.rb",
+		"/Users/pglennon/flatiron/week_2/prime-ruby-ruby-005/spec/prime_spec.rb",
+		"/Users/pglennon/flatiron/week_2/prime-ruby-ruby-005/prime.rb",
+		"/Users/pglennon/flatiron/week_2/nyc-pigeon-organizer-ruby-005/README.md",
+		"/Users/pglennon/flatiron/week_1/deploy-on-day-1-ruby-005/.git/MERGE_MSG",
+		"/Users/pglennon/flatiron/week_2/simple-nesting-ruby-005/spec/nested_spec.rb",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/pglennon/flatiron/week_2/simple-nesting-ruby-005/spec/spec_helper.rb",
+		"/Users/pglennon/.bash_profile",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/pglennon/Dropbox/Sublime/pglennon_license.txt",
+		"/Users/pglennon/flatiron/week_2/simple-nesting-ruby-005/.rspec",
+		"/Users/pglennon/Documents/Week_1.sublime-project",
+		"/Users/pglennon/flatiron/week_1/song-sorter-ruby-005/spec/song_sorter_spec.rb",
+		"/Users/pglennon/flatiron/week_1/song-sorter-ruby-005/song_sorter.rb",
+		"/Users/pglennon/flatiron/week_1/clmystery-ruby-005/solution",
+		"/Users/pglennon/flatiron/week_1/say-hello-ruby-ruby-005/say_hello.rb",
+		"/Users/pglennon/flatiron/week_1/key-for-min-value-ruby-005/spec/key_for_min_spec.rb",
+		"/Users/pglennon/flatiron/week_1/key-for-min-value-ruby-005/key_for_min.rb",
+		"/Users/pglennon/flatiron/week_1/my-each-ruby-005/.git/MERGE_MSG",
+		"/Users/pglennon/week_1/my-each-ruby-005/spec/my_each_spec.rb",
+		"/Users/pglennon/week_1/my-each-ruby-005/my_each.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Mystic_Street",
+		"/Users/pglennon/week_1/more-vowels-ruby-005/spec/more_vowels_spec.rb",
+		"/Users/pglennon/week_1/tweet-shortener-ruby-005/spec/tweet_shortener_spec.rb",
+		"/Users/pglennon/week_1/tweet-shortener-ruby-005/tweet_shortener.rb",
+		"/Users/pglennon/week_1/apples-and-holidays-ruby-005/holiday.rb",
+		"/Users/pglennon/week_1/apples-and-holidays-ruby-005/spec/holiday_spec.rb",
+		"/Users/pglennon/week_1/timed-greeting-ruby-005/spec/timed_greeting_spec.rb",
+		"/Users/pglennon/week_1/apples-and-holidays-ruby-005/apple.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005/instructions",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/SublimeCodeIntel.sublime-settings",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/Default (OSX).sublime-keymap",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Saint_Saveur_Court",
+		"/Users/pglennon/week_1/clmystery-ruby-005/hint1",
+		"/Users/pglennon/week_1/jukebox-ruby-005/spec/jukebox_spec.rb",
+		"/Users/pglennon/week_1/jukebox-ruby-005-1/jukebox.rb",
+		"/Users/pglennon/week_1/jukebox-ruby-005/jukebox.rb",
+		"/Users/pglennon/week_1/jukebox-ruby-005/bin/jukebox",
+		"/Users/pglennon/week_1/jukebox-ruby-005-1/bin/jukebox",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Taunton_Avenue",
+		"/Users/pglennon/week_1/ruby-lectures-1-ruby-005/Yukihiro.Matsumoto.key",
+		"/Users/pglennon/week_1/cartoon-collections-ruby-005/cartoon_collections.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Cadbury_Road",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Cerdan_Avenue",
+		"/Users/pglennon/week_1/deploy-on-day-1-ruby-005/CNAME",
+		"/Users/pglennon/week_1/deli-counter-ruby-005/spec/deli_counter_spec.rb",
+		"/Users/pglennon/week_1/deli-counter-ruby-005/deli_counter.rb",
+		"/Users/pglennon/week_1/phone-number-formatter-ruby-005/ruby_phone_format.rb",
+		"/Users/pglennon/week_1/ruby-lectures-1-ruby-005/part2.errors.rb",
+		"/Users/pglennon/week_1/more-vowels-ruby-005/more_vowels.rb",
+		"/Users/pglennon/week_1/badges-and-schedules-ruby-005/conference_badges.rb",
+		"/Users/pglennon/.emacs",
+		"/Users/pglennon/.rspec",
+		"/Users/pglennon/week_1/clmystery-ruby-005/README.md",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/memberships/Museum_of_Bash_History",
+		"/Users/pglennon/week_1/ruby-vowels-ruby-005/ruby_vowels.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/vehicles",
+		"/Users/pglennon/week_1/parrot-ruby-ruby-005/parrot.rb",
+		"/Users/pglennon/week_1/rspec-fizzbuzz-ruby-005/spec/fizzbuzz_spec.rb",
+		"/Users/pglennon/week_1/rspec-fizzbuzz-ruby-005/fizzbuzz.rb",
+		"/Users/pglennon/week_1/speaking-grandma-ruby-005/grandma.rb",
+		"/Users/pglennon/week_1/meal-choice-ruby-005/meal_choice.rb",
+		"/Users/pglennon/week_1/timed-greeting-ruby-005/timed_greeting.rb",
+		"/Users/pglennon/week_1/say-hello-ruby-ruby-005/say_hello.rb",
+		"/Users/pglennon/week_1/ruby-variable-assignment-ruby-005/spec/assignment_spec.rb",
+		"/Users/pglennon/week_1/say-hello-ruby-ruby-005/spec/say_hello_spec.rb",
+		"/Users/pglennon/week_1/syntax-error-ruby-ruby-005/syntax_error.rb",
+		"/Users/pglennon/week_1/dice-roll-ruby-ruby-005/dice_roll.rb",
+		"/Users/pglennon/week_1/syntax-error-ruby-ruby-005/spec/syntax_error_spec.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Sammett_Avenue",
+		"/Users/pglennon/week_1/clmystery-ruby-005/solution",
+		"/Users/pglennon/week_1/ruby-hello-world-ruby-005/spec/hello_world_spec.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005-master/spec/solution_spec.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005/spec/solution_spec.rb",
+		"/Users/pglennon/week_1/todo-ruby-basics-ruby-005/spec/spec_helper.rb",
+		"/Users/pglennon/week_1/todo-lab-basics-ruby-005/spec/spec_helper.rb",
+		"/Users/pglennon/week_1/todo-lab-basics-ruby-005/spec/flatiron_guide_spec.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005-master/spec/spec_helper.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005/spec/spec_helper.rb",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Sparrow_Street",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/AdvancedNewFile/Default (OSX).sublime-keymap",
+		"/Users/pglennon/week_1/deploy-on-day-1-ruby-005/students/ashleyblewer.html",
+		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Haley_Street",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/sublemacspro/Default.sublime-keymap",
+		"/Users/pglennon/week_1/ruby-lectures-1-ruby-005/part1.basics.rb",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Installed Packages/sublemacspro.sublime-package",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/sublemacspro.sublime-settings",
+		"/Users/pglennon/ruby-lectures-1-ruby-005/part1.basics.rb",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Misc.sublime-project",
+		"/Users/pglennon/todo-ruby-basics-ruby-005/spec/ruby_basics_spec.rb",
+		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/students/pglennon.html",
+		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/students/student_name.html",
+		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/css/style.css",
+		"/Users/pglennon/Desktop/clmystery-ruby-005/spec/solution_spec.rb",
+		"/Users/pglennon/Desktop/clmystery-ruby-005-master/spec/solution_spec.rb",
+		"/Users/pglennon/git-flow/.git/MERGE_MSG",
+		"/Users/pglennon/git-flow/commit-remote.txt",
+		"/Users/pglennon/.irbrc",
+		"/Users/pglennon/.gemrc",
+		"/Users/pglennon/.gitconfig",
+		"/Users/pglennon/.gitignore",
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/index.html",
+		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/.gitignore",
+		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/img/flatiron-logo-high-res.svg",
+		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/css/style_team_7525.css"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"{}",
+			"    #",
+			"consolidated_cart",
+			"{}",
+			"tic_tac_toe_board",
+			"top_right",
+			"\n      ",
+			"supplies",
+			"suppl",
+			"\n    ",
+			"\"(#{}\"",
+			"Ada",
+			"]/)",
+			"c",
+			"    ",
+			"num",
+			"fizzbuzz",
+			"\"\"",
+			"require_relative",
+			"!\"",
+			"def",
+			"phrase",
+			"\n#",
+			"6",
+			"\n  ",
+			"1",
+			"puts",
+			"say_hello",
+			"name",
+			"\n    ",
+			"describe",
+			"s",
+			"ss",
+			"ctrl"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"holiday_supplies",
+			"supplies",
+			"holiday_supplies",
+			"\"]\n",
+			"holiday_supplies",
+			"super"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/pglennon/flatiron/week_2/green_grocer-ruby-005/spec/grocer_spec.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3750,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								974,
+								974
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 326.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "Blog.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"col",
+				"collections_practice-ruby-005/spec/collections_practice_spec.rb"
+			],
+			[
+				"ran",
+				"green_grocer-ruby-005/random_grocery_generator.rb"
+			],
+			[
+				"gro",
+				"green_grocer-ruby-005/spec/grocer_spec.rb"
+			],
+			[
+				"rege",
+				"regex_rally-ruby-005/spec/regex_rally_spec.rb"
+			],
+			[
+				"pigeon",
+				"nyc-pigeon-organizer-ruby-005/nyc_pigeon_organizer.rb"
+			],
+			[
+				"fin",
+				"find-hashtags-ruby-005/spec/find_hashtag_spec.rb"
+			],
+			[
+				"hash",
+				"find-hashtags-ruby-005/find_hashtag.rb"
+			],
+			[
+				"prim",
+				"prime-ruby-ruby-005/spec/prime_spec.rb"
+			],
+			[
+				"n",
+				"nyc-pigeon-organizer-ruby-005/spec/nyc_pigeon_organizer_spec.rb"
+			],
+			[
+				"spec",
+				"simple-nesting-ruby-005/spec/nested_spec.rb"
+			],
+			[
+				"nest",
+				"simple-nesting-ruby-005/spec/nested_spec.rb"
+			],
+			[
+				"song",
+				"song-sorter-ruby-005/spec/song_sorter_spec.rb"
+			],
+			[
+				"key_f",
+				"key-for-min-value-ruby-005/spec/key_for_min_spec.rb"
+			],
+			[
+				"my",
+				"my-each-ruby-005/spec/my_each_spec.rb"
+			],
+			[
+				"hol",
+				"apples-and-holidays-ruby-005/holiday.rb"
+			],
+			[
+				"tweet",
+				"tweet-shortener-ruby-005/spec/tweet_shortener_spec.rb"
+			],
+			[
+				"holi",
+				"apples-and-holidays-ruby-005/holiday.rb"
+			],
+			[
+				"ho",
+				"apples-and-holidays-ruby-005/holiday.rb"
+			],
+			[
+				"juke",
+				"jukebox-ruby-005-1/jukebox.rb"
+			],
+			[
+				"j",
+				"jukebox-ruby-005/bin/jukebox"
+			],
+			[
+				"cart",
+				"cartoon-collections-ruby-005/cartoon_collections.rb"
+			],
+			[
+				"carto",
+				"cartoon-collections-ruby-005/cartoon_collections.rb"
+			],
+			[
+				"juk",
+				"jukebox-ruby-005/bin/jukebox"
+			],
+			[
+				"jukeb",
+				"jukebox-ruby-005/bin/jukebox"
+			],
+			[
+				"phon",
+				"phone-number-formatter-ruby-005/ruby_phone_format.rb"
+			],
+			[
+				"deli",
+				"deli-counter-ruby-005/spec/deli_counter_spec.rb"
+			],
+			[
+				"more",
+				"more-vowels-ruby-005/spec/more_vowels_spec.rb"
+			],
+			[
+				"vowe",
+				"more-vowels-ruby-005/spec/more_vowels_spec.rb"
+			],
+			[
+				"timed",
+				"timed-greeting-ruby-005/spec/timed_greeting_spec.rb"
+			],
+			[
+				"syn",
+				"syntax-error-ruby-ruby-005/spec/syntax_error_spec.rb"
+			],
+			[
+				"synta",
+				"syntax-error-ruby-ruby-005/syntax_error.rb"
+			],
+			[
+				"say",
+				"say-hello-ruby-ruby-005/say_hello.rb"
+			],
+			[
+				"par",
+				"ruby-lectures-1-ruby-005/part2.errors.rb"
+			],
+			[
+				"stu",
+				"students/student_name.html"
+			],
+			[
+				"pgl",
+				"students/pglennon.html"
+			],
+			[
+				"sty",
+				"css/style.css"
+			],
+			[
+				"stude",
+				"students/student_name.html"
+			],
+			[
+				".git",
+				".gitignore"
+			],
+			[
+				"studen",
+				"students/student_name.html"
+			],
+			[
+				"pge",
+				"students/pglennon.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/flatiron/week_2/Week_2.sublime-project"
+			],
+			[
+				"2",
+				"~/flatiron/week_1/key-for-min-value-ruby-005/week_2.sublime-workspace"
+			],
+			[
+				"Mis",
+				"~/Library/Application Support/Sublime Text 3/Packages/User/Misc.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"song",
+				"songs_by_artist"
+			],
+			[
 				"son",
 				"songs_by_artist"
 			],
@@ -35,15 +39,18 @@
 			"file": "_config.yml",
 			"settings":
 			{
-				"buffer_size": 2845,
+				"buffer_size": 2883,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "source/_posts/2014-06-10-first-post.markdown",
+			"contents": "---\nlayout: post\ntitle: \"Ruby's Hash.new and {}\"\ndate: 2014-06-10 21:18:18 -0400\ncomments: true\ncategories: [Ruby, Hashes, Flatiron&nbsp;School]\n---\n\n\nIn a recent lab exercise at Flatiron, we were tasked with tallying the occurences of a word in a given sentence.  My first shot, as a Ruby newbie (Rubie?  Nuby?):\n\n```ruby\ndef count_words(sentence)\n  occurences = {}\n  sentence.split(\" \").each do |word|\n    if occurences[word]\n      occurences[word] += 1\n    else\n      occurences[word] = 1\n    end\n  end\n  occurences\nend\n```\n\nAnd it worked.  But it felt bulky, like there must be a more concise way.  Looking over the spec file, I saw a comment which advised using ```Hash.new(0)``` rather than ```{}```.  There were two things I didn't understand.  1: that ```Hash.new``` and ```{}``` were different, and 2: that it looked like you could pass ```Hash.new``` an argument!\n\n### Hash.new(0)?\n\nGoogling \"Ruby Hash.new vs. braces\" led to [this blog post](http://www.developwithpurpose.com/ruby-hash-awesomeness-part-1/\n) elaborating on the differences between the two methods of hash construction.  Constructing as hash like this:\n```ruby\nhash = {\"a\" => 1, \"b\" => 2}\n```\nallows you to initialize the hash with data all on one line.  Whereas using ```Hash.new``` can only return an empty hash.  What ```Hash.new``` can do, though, is accept an argument.  As the author of that post points out, that argument is the default value for the hash, in place of ```nil```.  For example:\n\n```ruby\nhash_1 = {}          # Empty hash\nhash_1[:a]           # nil\n\nhash_2 = Hash.new(0) # Empty hash\nhash_2[:a]           # 0\n```\n\nThis was perfect!  If I could set the default value for my ```occurences``` hash to 0, I could eliminate most of the code in my each block, reducing it to:\n```ruby\n  sentence.split(\" \").each do |word|\n    occurences[word] += 1\n  end\n```\n\nThis works because ```occurences[word] += 1``` really means ```occurences[word] = occurences[word] + 1```. As the default value of ```occurences``` is 0, whenever a new word is found, ```occurences[word]``` is set to 0 + 1.  The tests pass, and I'm satisfied.  On to the next one.\n\n### Hash.new([]): humbled again\n\nNext problem: organize a list of songs, in the format of an \"Artist - Song\" String, into a hash of this format: artist => array of songs.  With my newfound knowledge of default Hash values, I jumped in like this:\n\n```ruby\ndef organize_songs_by_artist(songs)\n  songs_by_artist = Hash.new([])\n  songs.each do |song|\n    artist, song_name = song.split(\" - \")\n    songs_by_artist[artist] << song_name\n  end\n  songs_by_artist\nend\n```\n\nWith an empty array as the default Hash value, this should work just like the previous question!  Right?\n\nWell no, of course it didn't.  I was returned an empty hash.  I look back over my code, and try some quick tests in irb, to no avail.  Puzzled, I throw myself once again upon the mercy of Google.\n\nAs often happens, I found a [StackOverflow question](http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash) from somehow having a very similar problem.  They're using yet another method of initializing a Hash, using a block:\n\n```ruby\n  h = Hash.new{Array.new}\n```\n\nI didn't know you could do that, but looking at the [Hash documentation](http://www.ruby-doc.org/core-2.1.2/Hash.html#method-c-new) explains that this method will cause the block to execute and return a default value.  That's pretty neat, but the same problem is present.  It looks like nothing shoveled onto the default empty array is saved.\n\n[The top answer](http://stackoverflow.com/a/2552946/3536464) does an excellent job of explaining this confusing behavior.\n\nI don't think I fully understand it, but what I got from this answer is that when I call ```songs_by_artist[artist] << song_name``` for an artist that is not yet in the hash, it evaluates to this: ```[] << song_name```.  So the value DOES get shoveled to an array, but since there is nothing that points to that array, it gets garbage collected.  The solution is to initialize my hash with a block that will, as a default, explicitly assign an empty array to the non-existant key.  That is, instead of initializing my hash with this:\n\n```ruby\n songs_by_artist = Hash.new([])\n```\n\n , I could do this:\n\n ```ruby\n   songs_by_artist = Hash.new{|hash, key| hash[key] = []}\n```\n\nSo when ```songs_by_artist[artist] << song_name``` executes for a non-existant artist, the hash will create an empty array, assign it as the value of ```songs_by_artist[artist]```, and then shovel ```song_name``` onto that array.\n\nMy final code, which passes:\n\n```ruby\n\n```",
+			"file": "source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown",
+			"file_size": 4395,
+			"file_write_time": 130469661380000000,
 			"settings":
 			{
-				"buffer_size": 336,
+				"buffer_size": 4614,
 				"line_ending": "Unix"
 			}
 		}
@@ -132,11 +139,13 @@
 	},
 	"file_history":
 	[
+		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/pglennon/flatiron/octopress/_deploy/javascripts/modernizr-2.0.js",
+		"/Users/pglennon/flatiron/octopress/source/_posts/2014-06-10-first-post.markdown",
 		"/Users/pglennon/flatiron/octopress/.gitignore",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/1ecdab54389bf3dcd3cd3ce14601098a151d77aa/_filter.scssc",
 		"/Users/pglennon/flatiron/octopress/source/_includes/footer.html",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/090c346e956f9e41cda3cb72c0bf662ac56d2ef7/_force-wrap.scssc",
-		"/Users/pglennon/flatiron/octopress/source/_posts/2014-06-10-first-post.markdown",
 		"/Users/pglennon/flatiron/octopress/_deploy/sitemap.xml",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/f6761ddaeec35b3fbbfecf2f57b7e6d08d058c16/_solarized.scssc",
 		"/Users/pglennon/flatiron/octopress/source/atom.xml",
@@ -168,7 +177,6 @@
 		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/pglennon/flatiron/week_2/simple-nesting-ruby-005/spec/spec_helper.rb",
 		"/Users/pglennon/.bash_profile",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/pglennon/Dropbox/Sublime/pglennon_license.txt",
 		"/Users/pglennon/flatiron/week_2/simple-nesting-ruby-005/.rspec",
 		"/Users/pglennon/Documents/Week_1.sublime-project",
@@ -258,8 +266,7 @@
 		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/css/style.css",
 		"/Users/pglennon/Desktop/clmystery-ruby-005/spec/solution_spec.rb",
 		"/Users/pglennon/Desktop/clmystery-ruby-005-master/spec/solution_spec.rb",
-		"/Users/pglennon/git-flow/.git/MERGE_MSG",
-		"/Users/pglennon/git-flow/commit-remote.txt"
+		"/Users/pglennon/git-flow/.git/MERGE_MSG"
 	],
 	"find":
 	{
@@ -343,15 +350,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2845,
+						"buffer_size": 2883,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								120,
-								120
+								161,
+								161
 							]
 						],
 						"settings":
@@ -472,23 +479,24 @@
 				},
 				{
 					"buffer": 1,
-					"file": "source/_posts/2014-06-10-first-post.markdown",
+					"file": "source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 336,
+						"buffer_size": 4614,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								336,
-								336
+								4614,
+								4614
 							]
 						],
 						"settings":
 						{
+							"SideBarAutoAddFoldersForOpenedFiles": 1,
 							"codeintel": true,
 							"codeintel_config":
 							{
@@ -593,10 +601,12 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1335.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -655,6 +665,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"2014",
+				"source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown"
+			],
 			[
 				"first",
 				"source/_posts/2014-06-10-first-post.markdown"

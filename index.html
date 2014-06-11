@@ -5,15 +5,15 @@
 	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
 	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<meta charset="utf-8">
-	<title>Etc....  | TBD</title>
+	<title>Working on it...  | Title TBD</title>
 
 <meta name="author" content="Peter Glennon"> 
 
-<meta name="description" content="Hello World Temp links >> http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash http://stackoverflow.com/ &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="Ruby, Flatiron School,"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<link href="/atom.xml" rel="alternate" title="TBD" type="application/atom+xml">
+	<link href="/atom.xml" rel="alternate" title="Title TBD" type="application/atom+xml">
 	<link rel="canonical" href="">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -62,8 +62,8 @@ $(document).ready(
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">TBD</a></h1>
-<h4>Etc....</h4>
+	<header id="header" class="inner"><h1><a href="/">Title TBD</a></h1>
+<h4>Working on it...</h4>
 <nav id="main-nav"><ul>
 	<li><a href="/">Blog</a></li>
 	<li><a href="/about">About</a></li>
@@ -102,18 +102,151 @@ $(document).ready(
     <article class="post">
 	<h2 class="title">
 		
-		<a href="/blog/2014/06/10/first-post/">
+		<a href="/blog/2014/06/10/rubys-hash-dot-new-and-%7B%7D/">
 		
-			First Post</a>
+			Ruby&#8217;s Hash.new and {}</a>
 	</h2>
 	<div class="entry-content">
-		<p>Hello World</p>
+		<p>In a recent lab exercise at Flatiron, we were tasked with tallying the occurences of a word in a given sentence.  My first shot, as a Ruby newbie (Rubie?  Nuby?):</p>
 
-<p>Temp links >></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">occurences</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>  <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">word</span><span class="o">|</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">occurences</span><span class="o">[</span><span class="n">word</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">occurences</span><span class="o">[</span><span class="n">word</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="n">occurences</span><span class="o">[</span><span class="n">word</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">occurences</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><a href="http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash">http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash</a></p>
 
-<p><a href="http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash">http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash</a></p>
+<p>And it worked.  But it felt bulky, like there must be a more concise way.  Looking over the spec file, I saw a comment which advised using <code>Hash.new(0)</code> rather than <code>{}</code>.  There were two things I didn&rsquo;t understand.  1: that <code>Hash.new</code> and <code>{}</code> were different, and 2: that it looked like you could pass <code>Hash.new</code> an argument!</p>
+
+<h3>Hash.new(0)?</h3>
+
+<p>Googling &ldquo;Ruby Hash.new vs. braces&rdquo; led to <a href="http://www.developwithpurpose.com/ruby-hash-awesomeness-part-1/">this blog post</a> elaborating on the differences between the two methods of hash construction.  Constructing as hash like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">hash</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>allows you to initialize the hash with data all on one line.  Whereas using <code>Hash.new</code> can only return an empty hash.  What <code>Hash.new</code> can do, though, is accept an argument.  As the author of that post points out, that argument is the default value for the hash, in place of <code>nil</code>.  For example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">hash_1</span> <span class="o">=</span> <span class="p">{}</span>          <span class="c1"># Empty hash</span>
+</span><span class='line'><span class="n">hash_1</span><span class="o">[</span><span class="ss">:a</span><span class="o">]</span>           <span class="c1"># nil</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">hash_2</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Empty hash</span>
+</span><span class='line'><span class="n">hash_2</span><span class="o">[</span><span class="ss">:a</span><span class="o">]</span>           <span class="c1"># 0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This was perfect!  If I could set the default value for my <code>occurences</code> hash to 0, I could eliminate most of the code in my each block, reducing it to:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">word</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">occurences</span><span class="o">[</span><span class="n">word</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works because <code>occurences[word] += 1</code> really means <code>occurences[word] = occurences[word] + 1</code>. As the default value of <code>occurences</code> is 0, whenever a new word is found, <code>occurences[word]</code> is set to 0 + 1.  The tests pass, and I&rsquo;m satisfied.  On to the next one.</p>
+
+<h3>Hash.new([]): humbled again</h3>
+
+<p>Next problem: organize a list of songs, in the format of an &ldquo;Artist &ndash; Song&rdquo; String, into a hash of this format: artist => array of songs.  With my newfound knowledge of default Hash values, I jumped in like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">organize_songs_by_artist</span><span class="p">(</span><span class="n">songs</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">songs_by_artist</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[]</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">songs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">song</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">artist</span><span class="p">,</span> <span class="n">song_name</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; - &quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">songs_by_artist</span><span class="o">[</span><span class="n">artist</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">song_name</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">songs_by_artist</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With an empty array as the default Hash value, this should work just like the previous question!  Right?</p>
+
+<p>Well no, of course it didn&rsquo;t.  I was returned an empty hash.  I look back over my code, and try some quick tests in irb, to no avail.  Puzzled, I throw myself once again upon the mercy of Google.</p>
+
+<p>As often happens, I found a <a href="http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash">StackOverflow question</a> from somehow having a very similar problem.  They&rsquo;re using yet another method of initializing a Hash, using a block:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">h</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">{</span><span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I didn&rsquo;t know you could do that, but looking at the <a href="http://www.ruby-doc.org/core-2.1.2/Hash.html#method-c-new">Hash documentation</a> explains that this method will cause the block to execute and return a default value.  That&rsquo;s pretty neat, but the same problem is present.  It looks like nothing shoveled onto the default empty array is saved.</p>
+
+<p><a href="http://stackoverflow.com/a/2552946/3536464">The top answer</a> does an excellent job of explaining this confusing behavior.</p>
+
+<p>I don&rsquo;t think I fully understand it, but what I got from this answer is that when I call <code>songs_by_artist[artist] &lt;&lt; song_name</code> for an artist that is not yet in the hash, it evaluates to this: <code>[] &lt;&lt; song_name</code>.  So the value DOES get shoveled to an array, but since there is nothing that points to that array, it gets garbage collected.  The solution is to initialize my hash with a block that will, as a default, explicitly assign an empty array to the non-existant key.  That is, instead of initializing my hash with this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">songs_by_artist</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[]</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> I can do this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="n">songs_by_artist</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">{</span><span class="o">|</span><span class="nb">hash</span><span class="p">,</span> <span class="n">key</span><span class="o">|</span> <span class="nb">hash</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="o">=</span> <span class="o">[]</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So when <code>songs_by_artist[artist] &lt;&lt; song_name</code> executes for a non-existant artist, the hash will create an empty array, assign it as the value of <code>songs_by_artist[artist]</code>, and then shovel <code>song_name</code> onto that array.</p>
+
+<p>My final code, which passes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">organize_songs_by_artist</span><span class="p">(</span><span class="n">songs</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">songs_by_artist</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">{</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span> <span class="n">key</span><span class="o">|</span> <span class="nb">hash</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="o">=</span> <span class="o">[]</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">songs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">song</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">artist</span><span class="p">,</span> <span class="n">song_name</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; - &quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">songs_by_artist</span><span class="o">[</span><span class="n">artist</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">song_name</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">songs_by_artist</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 		
 		
@@ -133,12 +266,12 @@ $(document).ready(
   
 
 
-<time datetime="2014-06-10T11:44:37-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time></div>
+<time datetime="2014-06-10T21:18:18-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time></div>
 	
 
 <div class="tags">
 
-	<a class='category' href='/blog/categories/flatiron-school/'>Flatiron&nbsp;School</a>
+	<a class='category' href='/blog/categories/flatiron-school/'>Flatiron&nbsp;School</a>, <a class='category' href='/blog/categories/hashes/'>Hashes</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
 
 </div>
 

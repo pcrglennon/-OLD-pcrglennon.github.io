@@ -38,6 +38,14 @@
 				"buffer_size": 2845,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "source/_posts/2014-06-10-first-post.markdown",
+			"settings":
+			{
+				"buffer_size": 336,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -124,7 +132,19 @@
 	},
 	"file_history":
 	[
+		"/Users/pglennon/flatiron/octopress/.gitignore",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/1ecdab54389bf3dcd3cd3ce14601098a151d77aa/_filter.scssc",
+		"/Users/pglennon/flatiron/octopress/source/_includes/footer.html",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/090c346e956f9e41cda3cb72c0bf662ac56d2ef7/_force-wrap.scssc",
 		"/Users/pglennon/flatiron/octopress/source/_posts/2014-06-10-first-post.markdown",
+		"/Users/pglennon/flatiron/octopress/_deploy/sitemap.xml",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/f6761ddaeec35b3fbbfecf2f57b7e6d08d058c16/_solarized.scssc",
+		"/Users/pglennon/flatiron/octopress/source/atom.xml",
+		"/Users/pglennon/flatiron/octopress/source/robots.txt",
+		"/Users/pglennon/flatiron/octopress/plugins/pagination.rb",
+		"/Users/pglennon/flatiron/octopress/source/_includes/google_plus_one.html",
+		"/Users/pglennon/flatiron/octopress/plugins/post_filters.rb",
+		"/Users/pglennon/flatiron/octopress/source/_includes/asides/recent_posts.html",
 		"/Users/pglennon/flatiron/week_2/green_grocer-ruby-005/spec/grocer_spec.rb",
 		"/Users/pglennon/flatiron/octopress/config.ru",
 		"/Users/pglennon/flatiron/octopress/config.rb",
@@ -239,16 +259,7 @@
 		"/Users/pglennon/Desktop/clmystery-ruby-005/spec/solution_spec.rb",
 		"/Users/pglennon/Desktop/clmystery-ruby-005-master/spec/solution_spec.rb",
 		"/Users/pglennon/git-flow/.git/MERGE_MSG",
-		"/Users/pglennon/git-flow/commit-remote.txt",
-		"/Users/pglennon/.irbrc",
-		"/Users/pglennon/.gemrc",
-		"/Users/pglennon/.gitconfig",
-		"/Users/pglennon/.gitignore",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
-		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/index.html",
-		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/.gitignore",
-		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/img/flatiron-logo-high-res.svg",
-		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/css/style_team_7525.css"
+		"/Users/pglennon/git-flow/commit-remote.txt"
 	],
 	"find":
 	{
@@ -323,7 +334,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -345,6 +356,7 @@
 						],
 						"settings":
 						{
+							"SideBarAutoAddFoldersForOpenedFiles": 1,
 							"codeintel": true,
 							"codeintel_config":
 							{
@@ -455,6 +467,138 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "source/_posts/2014-06-10-first-post.markdown",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 336,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								336,
+								336
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": false,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 0,
 					"type": "text"
 				}
@@ -511,6 +655,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"first",
+				"source/_posts/2014-06-10-first-post.markdown"
+			],
 			[
 				"config",
 				"_config.yml"

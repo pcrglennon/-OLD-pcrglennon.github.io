@@ -39,18 +39,15 @@
 			"file": "_config.yml",
 			"settings":
 			{
-				"buffer_size": 2883,
+				"buffer_size": 2910,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "---\nlayout: post\ntitle: \"Ruby's Hash.new and {}\"\ndate: 2014-06-10 21:18:18 -0400\ncomments: true\ncategories: [Ruby, Hashes, Flatiron&nbsp;School]\n---\n\n\nIn a recent lab exercise at Flatiron, we were tasked with tallying the occurences of a word in a given sentence.  My first shot, as a Ruby newbie (Rubie?  Nuby?):\n\n```ruby\ndef count_words(sentence)\n  occurences = {}\n  sentence.split(\" \").each do |word|\n    if occurences[word]\n      occurences[word] += 1\n    else\n      occurences[word] = 1\n    end\n  end\n  occurences\nend\n```\n\nAnd it worked.  But it felt bulky, like there must be a more concise way.  Looking over the spec file, I saw a comment which advised using ```Hash.new(0)``` rather than ```{}```.  There were two things I didn't understand.  1: that ```Hash.new``` and ```{}``` were different, and 2: that it looked like you could pass ```Hash.new``` an argument!\n\n### Hash.new(0)?\n\nGoogling \"Ruby Hash.new vs. braces\" led to [this blog post](http://www.developwithpurpose.com/ruby-hash-awesomeness-part-1/\n) elaborating on the differences between the two methods of hash construction.  Constructing as hash like this:\n```ruby\nhash = {\"a\" => 1, \"b\" => 2}\n```\nallows you to initialize the hash with data all on one line.  Whereas using ```Hash.new``` can only return an empty hash.  What ```Hash.new``` can do, though, is accept an argument.  As the author of that post points out, that argument is the default value for the hash, in place of ```nil```.  For example:\n\n```ruby\nhash_1 = {}          # Empty hash\nhash_1[:a]           # nil\n\nhash_2 = Hash.new(0) # Empty hash\nhash_2[:a]           # 0\n```\n\nThis was perfect!  If I could set the default value for my ```occurences``` hash to 0, I could eliminate most of the code in my each block, reducing it to:\n```ruby\n  sentence.split(\" \").each do |word|\n    occurences[word] += 1\n  end\n```\n\nThis works because ```occurences[word] += 1``` really means ```occurences[word] = occurences[word] + 1```. As the default value of ```occurences``` is 0, whenever a new word is found, ```occurences[word]``` is set to 0 + 1.  The tests pass, and I'm satisfied.  On to the next one.\n\n### Hash.new([]): humbled again\n\nNext problem: organize a list of songs, in the format of an \"Artist - Song\" String, into a hash of this format: artist => array of songs.  With my newfound knowledge of default Hash values, I jumped in like this:\n\n```ruby\ndef organize_songs_by_artist(songs)\n  songs_by_artist = Hash.new([])\n  songs.each do |song|\n    artist, song_name = song.split(\" - \")\n    songs_by_artist[artist] << song_name\n  end\n  songs_by_artist\nend\n```\n\nWith an empty array as the default Hash value, this should work just like the previous question!  Right?\n\nWell no, of course it didn't.  I was returned an empty hash.  I look back over my code, and try some quick tests in irb, to no avail.  Puzzled, I throw myself once again upon the mercy of Google.\n\nAs often happens, I found a [StackOverflow question](http://stackoverflow.com/questions/2552579/ruby-method-array-not-updating-the-array-in-hash) from somehow having a very similar problem.  They're using yet another method of initializing a Hash, using a block:\n\n```ruby\n  h = Hash.new{Array.new}\n```\n\nI didn't know you could do that, but looking at the [Hash documentation](http://www.ruby-doc.org/core-2.1.2/Hash.html#method-c-new) explains that this method will cause the block to execute and return a default value.  That's pretty neat, but the same problem is present.  It looks like nothing shoveled onto the default empty array is saved.\n\n[The top answer](http://stackoverflow.com/a/2552946/3536464) does an excellent job of explaining this confusing behavior.\n\nI don't think I fully understand it, but what I got from this answer is that when I call ```songs_by_artist[artist] << song_name``` for an artist that is not yet in the hash, it evaluates to this: ```[] << song_name```.  So the value DOES get shoveled to an array, but since there is nothing that points to that array, it gets garbage collected.  The solution is to initialize my hash with a block that will, as a default, explicitly assign an empty array to the non-existant key.  That is, instead of initializing my hash with this:\n\n```ruby\n songs_by_artist = Hash.new([])\n```\n\n , I could do this:\n\n ```ruby\n   songs_by_artist = Hash.new{|hash, key| hash[key] = []}\n```\n\nSo when ```songs_by_artist[artist] << song_name``` executes for a non-existant artist, the hash will create an empty array, assign it as the value of ```songs_by_artist[artist]```, and then shovel ```song_name``` onto that array.\n\nMy final code, which passes:\n\n```ruby\n\n```",
 			"file": "source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown",
-			"file_size": 4395,
-			"file_write_time": 130469661380000000,
 			"settings":
 			{
-				"buffer_size": 4614,
+				"buffer_size": 4870,
 				"line_ending": "Unix"
 			}
 		}
@@ -58,7 +55,7 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 47.0,
 		"selected_items":
 		[
 			[
@@ -118,7 +115,7 @@
 				"Package Control: Disable Package"
 			]
 		],
-		"width": 530.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -139,18 +136,55 @@
 	},
 	"file_history":
 	[
+		"/Users/pglennon/flatiron/octopress/_deploy/stylesheets/style.css",
+		"/Users/pglennon/flatiron/octopress/sass/plugins/_fancybox.scss",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/af636dd7885666a65ea6afb8e97ab768ca010577/_fancybox.scssc",
+		"/Users/pglennon/flatiron/octopress/source/_includes/custom/fancybox_head.html",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/source/_includes/fancybox.html",
+		"/Users/pglennon/flatiron/octopress/source/_includes/fancybox.html",
+		"/Users/pglennon/flatiron/octopress/_deploy/fonts/FontAwesome.otf",
+		"/Users/pglennon/flatiron/octopress/source/_includes/facebook.html",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/base/_typography.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/base/_utilities.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/base/_theme.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/base/_solarized.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/base/_main.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/base/_layout.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/base/_font.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/base/_color.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/source/_includes/google_analytics.html",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/source/_includes/navigation.html",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/source/robots.txt",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/source/index.html",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/source/atom.xml",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/screen.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/_plugins.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/_parts.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/sass/_base.scss",
+		"/Users/pglennon/flatiron/octopress/.themes/cleanpress/README.md",
+		"/Users/pglennon/flatiron/octopress/.themes/classic/.editorconfig",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/f6761ddaeec35b3fbbfecf2f57b7e6d08d058c16/_theme.scssc",
+		"/Users/pglennon/flatiron/octopress/.travis.yml",
+		"/Users/pglennon/flatiron/octopress/.gitignore",
+		"/Users/pglennon/flatiron/octopress/sass/plugins/_plugins.scss",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/f92cf802a3ebba98e867ddfec23e5185bc633e82/_plugins.scssc",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/73bc41c852cd457ea2d2aef52ce84f5c2d2b052c/_plugins.scssc",
+		"/Users/pglennon/flatiron/octopress/sass/_plugins.scss",
+		"/Users/pglennon/flatiron/octopress/plugins/pagination.rb",
+		"/Users/pglennon/flatiron/octopress/sass/screen.scss",
+		"/Users/pglennon/flatiron/octopress/_deploy/sitemap.xml",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/7671205d720c2fd6df27f633e5593b119f205b7e/_css3.scssc",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/0b485577bf632a4891b2f61dc31d98db903c21e9/_clearfix.scssc",
+		"/Users/pglennon/flatiron/octopress/source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown",
 		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/pglennon/flatiron/octopress/_deploy/javascripts/modernizr-2.0.js",
 		"/Users/pglennon/flatiron/octopress/source/_posts/2014-06-10-first-post.markdown",
-		"/Users/pglennon/flatiron/octopress/.gitignore",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/1ecdab54389bf3dcd3cd3ce14601098a151d77aa/_filter.scssc",
 		"/Users/pglennon/flatiron/octopress/source/_includes/footer.html",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/090c346e956f9e41cda3cb72c0bf662ac56d2ef7/_force-wrap.scssc",
-		"/Users/pglennon/flatiron/octopress/_deploy/sitemap.xml",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/f6761ddaeec35b3fbbfecf2f57b7e6d08d058c16/_solarized.scssc",
 		"/Users/pglennon/flatiron/octopress/source/atom.xml",
 		"/Users/pglennon/flatiron/octopress/source/robots.txt",
-		"/Users/pglennon/flatiron/octopress/plugins/pagination.rb",
 		"/Users/pglennon/flatiron/octopress/source/_includes/google_plus_one.html",
 		"/Users/pglennon/flatiron/octopress/plugins/post_filters.rb",
 		"/Users/pglennon/flatiron/octopress/source/_includes/asides/recent_posts.html",
@@ -229,44 +263,7 @@
 		"/Users/pglennon/week_1/parrot-ruby-ruby-005/parrot.rb",
 		"/Users/pglennon/week_1/rspec-fizzbuzz-ruby-005/spec/fizzbuzz_spec.rb",
 		"/Users/pglennon/week_1/rspec-fizzbuzz-ruby-005/fizzbuzz.rb",
-		"/Users/pglennon/week_1/speaking-grandma-ruby-005/grandma.rb",
-		"/Users/pglennon/week_1/meal-choice-ruby-005/meal_choice.rb",
-		"/Users/pglennon/week_1/timed-greeting-ruby-005/timed_greeting.rb",
-		"/Users/pglennon/week_1/say-hello-ruby-ruby-005/say_hello.rb",
-		"/Users/pglennon/week_1/ruby-variable-assignment-ruby-005/spec/assignment_spec.rb",
-		"/Users/pglennon/week_1/say-hello-ruby-ruby-005/spec/say_hello_spec.rb",
-		"/Users/pglennon/week_1/syntax-error-ruby-ruby-005/syntax_error.rb",
-		"/Users/pglennon/week_1/dice-roll-ruby-ruby-005/dice_roll.rb",
-		"/Users/pglennon/week_1/syntax-error-ruby-ruby-005/spec/syntax_error_spec.rb",
-		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Sammett_Avenue",
-		"/Users/pglennon/week_1/clmystery-ruby-005/solution",
-		"/Users/pglennon/week_1/ruby-hello-world-ruby-005/spec/hello_world_spec.rb",
-		"/Users/pglennon/week_1/clmystery-ruby-005-master/spec/solution_spec.rb",
-		"/Users/pglennon/week_1/clmystery-ruby-005/spec/solution_spec.rb",
-		"/Users/pglennon/week_1/todo-ruby-basics-ruby-005/spec/spec_helper.rb",
-		"/Users/pglennon/week_1/todo-lab-basics-ruby-005/spec/spec_helper.rb",
-		"/Users/pglennon/week_1/todo-lab-basics-ruby-005/spec/flatiron_guide_spec.rb",
-		"/Users/pglennon/week_1/clmystery-ruby-005-master/spec/spec_helper.rb",
-		"/Users/pglennon/week_1/clmystery-ruby-005/spec/spec_helper.rb",
-		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Sparrow_Street",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/AdvancedNewFile/Default (OSX).sublime-keymap",
-		"/Users/pglennon/week_1/deploy-on-day-1-ruby-005/students/ashleyblewer.html",
-		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/streets/Haley_Street",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/sublemacspro/Default.sublime-keymap",
-		"/Users/pglennon/week_1/ruby-lectures-1-ruby-005/part1.basics.rb",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Installed Packages/sublemacspro.sublime-package",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/sublemacspro.sublime-settings",
-		"/Users/pglennon/ruby-lectures-1-ruby-005/part1.basics.rb",
-		"/Users/pglennon/Library/Application Support/Sublime Text 3/Packages/User/Misc.sublime-project",
-		"/Users/pglennon/todo-ruby-basics-ruby-005/spec/ruby_basics_spec.rb",
-		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/students/pglennon.html",
-		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/students/student_name.html",
-		"/Users/pglennon/Desktop/deploy-on-day-1-ruby-005/css/style.css",
-		"/Users/pglennon/Desktop/clmystery-ruby-005/spec/solution_spec.rb",
-		"/Users/pglennon/Desktop/clmystery-ruby-005-master/spec/solution_spec.rb",
-		"/Users/pglennon/git-flow/.git/MERGE_MSG"
+		"/Users/pglennon/week_1/speaking-grandma-ruby-005/grandma.rb"
 	],
 	"find":
 	{
@@ -284,6 +281,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"margin-bott",
+			".code",
 			"{}",
 			"    #",
 			"consolidated_cart",
@@ -350,15 +349,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2883,
+						"buffer_size": 2910,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								161,
-								161
+								2425,
+								2425
 							]
 						],
 						"settings":
@@ -483,20 +482,19 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4614,
+						"buffer_size": 4870,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4614,
-								4614
+								338,
+								338
 							]
 						],
 						"settings":
 						{
-							"SideBarAutoAddFoldersForOpenedFiles": 1,
 							"codeintel": true,
 							"codeintel_config":
 							{
@@ -606,7 +604,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1335.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -665,6 +663,22 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"fancy",
+				"sass/plugins/_fancybox.scss"
+			],
+			[
+				"scree",
+				"sass/screen.scss"
+			],
+			[
+				".css",
+				"_deploy/stylesheets/style.css"
+			],
+			[
+				"20",
+				"source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown"
+			],
 			[
 				"2014",
 				"source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown"
@@ -874,7 +888,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 150.0,
 	"status_bar_visible": true,
 	"template_settings":

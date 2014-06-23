@@ -9,7 +9,7 @@ categories: [Ruby, Hashes, Flatiron&nbsp;School]
 
 In a recent lab exercise at Flatiron, we were tasked with tallying the occurences of a word in a given sentence.  My first shot, as a Ruby newbie (Rubie?  Nuby?):
 
-```ruby
+{% codeblock lang:ruby %}
 def count_words(sentence)
   occurences = {}
   sentence.split(" ").each do |word|
@@ -21,7 +21,7 @@ def count_words(sentence)
   end
   occurences
 end
-```
+{% endcodeblock %}
 
 And it worked.  But it felt bulky, like there must be a more concise way.  Looking over the spec file, I saw a comment which advised using ```Hash.new(0)``` rather than ```{}```.  There were two things I didn't understand.  1: that ```Hash.new``` and ```{}``` were different, and 2: that it looked like you could pass ```Hash.new``` an argument!
 

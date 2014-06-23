@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby | Title TBD]]></title>
+  <title><![CDATA[Category: Ruby | Peter Glennon]]></title>
   <link href="http://pcrglennon.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://pcrglennon.github.io/"/>
-  <updated>2014-06-11T09:24:37-04:00</updated>
+  <updated>2014-06-23T10:19:45-04:00</updated>
   <id>http://pcrglennon.github.io/</id>
   <author>
     <name><![CDATA[Peter Glennon]]></name>
@@ -20,22 +20,35 @@
     <id>http://pcrglennon.github.io/blog/2014/06/10/rubys-hash-dot-new-and-{}</id>
     <content type="html"><![CDATA[<p>In a recent lab exercise at Flatiron, we were tasked with tallying the occurences of a word in a given sentence.  My first shot, as a Ruby newbie (Rubie?  Nuby?):</p>
 
-<p>```ruby
-def count_words(sentence)
-  occurences = {}
-  sentence.split(&ldquo; &rdquo;).each do |word|</p>
-
-<pre><code>if occurences[word]
-  occurences[word] += 1
-else
-  occurences[word] = 1
-end
-</code></pre>
-
-<p>  end
-  occurences
-end
-```</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">occurences</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>  <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span> <span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">word</span><span class="o">|&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;if occurences[word]</span>
+</span><span class='line'><span class="sr">  occurences[word] += 1</span>
+</span><span class='line'><span class="sr">else</span>
+</span><span class='line'><span class="sr">  occurences[word] = 1</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end</span>
+</span><span class='line'><span class="sr">  occurences</span>
+</span><span class='line'><span class="sr">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>And it worked.  But it felt bulky, like there must be a more concise way.  Looking over the spec file, I saw a comment which advised using <code>Hash.new(0)</code> rather than <code>{}</code>.  There were two things I didn&rsquo;t understand.  1: that <code>Hash.new</code> and <code>{}</code> were different, and 2: that it looked like you could pass <code>Hash.new</code> an argument!</p>
 

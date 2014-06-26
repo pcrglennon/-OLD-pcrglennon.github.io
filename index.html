@@ -5,7 +5,7 @@
 	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
 	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<meta charset="utf-8">
-	<title>Working on it...  | Peter Glennon</title>
+	<title>Explaining things to a vacuum  | Peter Glennon</title>
 
 <meta name="author" content="Peter Glennon"> 
 
@@ -63,7 +63,7 @@ $(document).ready(
 
 <body>
 	<header id="header" class="inner"><h1><a href="/">Peter Glennon</a></h1>
-<h4>Working on it...</h4>
+<h4>Explaining things to a vacuum</h4>
 <nav id="main-nav"><ul>
 	<li><a href="/">Blog</a></li>
 	<li><a href="/about">About</a></li>
@@ -97,6 +97,88 @@ $(document).ready(
 </header>
 
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/25/the-and-syntactic-sugar/">
+		
+			The (&amp;:) Syntactic Sugar</a>
+	</h2>
+	<div class="entry-content">
+		<p>While trying to figure out how to capitalize every word in a sentence (for a Ruby project), I came across some syntax I&rsquo;d never seen before:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:capitalize</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tried it out in irb, and sure enough, it seemed to do what I wanted.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">words</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:capitalize</span><span class="p">)</span>    <span class="c1">#=&gt; [&#39;Hello&#39;, &#39;World&#39;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It looks like the (&amp;), together with a symbolized method name, applys that method to each element in the collection.  And that&rsquo;s pretty much the short answer.  So if you just needed to figure out how to use it, no need to go further!</p>
+
+<h3>It&rsquo;s actually a bit more complicated</h3>
+
+<p>I was reminded of a similar shortcut in Scala:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">capitalize</span><span class="o">)</span>
+</span><span class='line'><span class="c1">// Equivalent to</span>
+</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">word</span> <span class="k">=&gt;</span> <span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>_</code> acts as a placeholder for the current element being iterated over.  With this in mind, my first thought of the ruby syntax was that <code>&amp;</code> was encapsulating the current element, along with a <code>send</code>.  So it would really boil down to something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">word</span><span class="o">|</span> <span class="n">word</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:capitalize</span><span class="p">)</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Though it effectively works this way, the actual process going on is more complicated.  Probably more complicated than I can adequately explain, but I&rsquo;m going to try in my next post.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-25T21:43:44-04:00" pubdate data-updated="true">Jun 25<span>th</span>, 2014</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/syntactic-sugar/'>Syntactic&nbsp;Sugar</a>
+
+</div>
+
+
+	
+		<span class="comments"><a href="/blog/2014/06/25/the-and-syntactic-sugar//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">

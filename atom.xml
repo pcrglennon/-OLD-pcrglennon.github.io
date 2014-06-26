@@ -4,7 +4,7 @@
   <title><![CDATA[Peter Glennon]]></title>
   <link href="http://pcrglennon.github.io/atom.xml" rel="self"/>
   <link href="http://pcrglennon.github.io/"/>
-  <updated>2014-06-23T10:19:45-04:00</updated>
+  <updated>2014-06-26T09:18:24-04:00</updated>
   <id>http://pcrglennon.github.io/</id>
   <author>
     <name><![CDATA[Peter Glennon]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The (&amp;:) syntactic sugar]]></title>
+    <link href="http://pcrglennon.github.io/blog/2014/06/25/the-and-syntactic-sugar/"/>
+    <updated>2014-06-25T21:43:44-04:00</updated>
+    <id>http://pcrglennon.github.io/blog/2014/06/25/the-and-syntactic-sugar</id>
+    <content type="html"><![CDATA[<p>While trying to figure out how to capitalize every word in a sentence (for a Ruby project), I came across some syntax I&rsquo;d never seen before:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:capitalize</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tried it out in irb, and sure enough, it seemed to do what I wanted.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">words</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:capitalize</span><span class="p">)</span>    <span class="c1">#=&gt; [&#39;Hello&#39;, &#39;World&#39;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It looks like the (&amp;), together with a symbolized method name, applys that method to each element in the collection.  And that&rsquo;s pretty much the short answer.  So if you just needed to figure out how to use it, no need to go further!</p>
+
+<h3>It&rsquo;s actually a bit more complicated</h3>
+
+<p>I was reminded of a similar shortcut in Scala:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">capitalize</span><span class="o">)</span>
+</span><span class='line'><span class="c1">// Equivalent to</span>
+</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">word</span> <span class="k">=&gt;</span> <span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>_</code> acts as a placeholder for the current element being iterated over.  With this in mind, my first thought of the ruby syntax was that <code>&amp;</code> was encapsulating the current element, along with a <code>send</code>.  So it would really boil down to something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">word</span><span class="o">|</span> <span class="n">word</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:capitalize</span><span class="p">)</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Though it effectively works this way, the actual process going on is more complicated.  Probably more complicated than I can adequately explain, but I&rsquo;m going to try in my next post.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby's Hash.new and {}]]></title>

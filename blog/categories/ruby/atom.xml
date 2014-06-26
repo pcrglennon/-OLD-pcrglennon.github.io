@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Peter Glennon]]></title>
   <link href="http://pcrglennon.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://pcrglennon.github.io/"/>
-  <updated>2014-06-23T10:19:45-04:00</updated>
+  <updated>2014-06-26T09:18:24-04:00</updated>
   <id>http://pcrglennon.github.io/</id>
   <author>
     <name><![CDATA[Peter Glennon]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The (&amp;:) syntactic sugar]]></title>
+    <link href="http://pcrglennon.github.io/blog/2014/06/25/the-and-syntactic-sugar/"/>
+    <updated>2014-06-25T21:43:44-04:00</updated>
+    <id>http://pcrglennon.github.io/blog/2014/06/25/the-and-syntactic-sugar</id>
+    <content type="html"><![CDATA[<p>While trying to figure out how to capitalize every word in a sentence (for a Ruby project), I came across some syntax I&rsquo;d never seen before:</p>
+
+<p><code>ruby
+words.map(&amp;:capitalize)
+</code></p>
+
+<p>I tried it out in irb, and sure enough, it seemed to do what I wanted.</p>
+
+<p><code>ruby
+words = ['hello', 'world']
+words.map(&amp;:capitalize)    #=&gt; ['Hello', 'World']
+</code></p>
+
+<p>It looks like the (&amp;), together with a symbolized method name, applys that method to each element in the collection.  And that&rsquo;s pretty much the short answer.  So if you just needed to figure out how to use it, no need to go further!</p>
+
+<h3>It&rsquo;s actually a bit more complicated</h3>
+
+<p>I was reminded of a similar shortcut in Scala:</p>
+
+<p><code>scala
+words.map(_.capitalize)
+// Equivalent to
+words.map(word =&gt; word.capitalize)
+</code></p>
+
+<p>The <code>_</code> acts as a placeholder for the current element being iterated over.  With this in mind, my first thought of the ruby syntax was that <code>&amp;</code> was encapsulating the current element, along with a <code>send</code>.  So it would really boil down to something like this:</p>
+
+<p><code>ruby
+words.map { |word| word.send(:capitalize) }
+</code></p>
+
+<p>Though it effectively works this way, the actual process going on is more complicated.  Probably more complicated than I can adequately explain, but I&rsquo;m going to try in my next post.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby's Hash.new and {}]]></title>

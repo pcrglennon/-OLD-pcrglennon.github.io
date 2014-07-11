@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Peter Glennon]]></title>
   <link href="http://pcrglennon.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://pcrglennon.github.io/"/>
-  <updated>2014-06-26T09:18:24-04:00</updated>
+  <updated>2014-07-11T09:30:58-04:00</updated>
   <id>http://pcrglennon.github.io/</id>
   <author>
     <name><![CDATA[Peter Glennon]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Between a Proc and a Hard Place]]></title>
+    <link href="http://pcrglennon.github.io/blog/2014/07/08/between-a-proc-and-a-hard-place/"/>
+    <updated>2014-07-08T12:50:36-04:00</updated>
+    <id>http://pcrglennon.github.io/blog/2014/07/08/between-a-proc-and-a-hard-place</id>
+    <content type="html"><![CDATA[<p>Before I get into talking about Procs, I should address something.  If you came here because StackOverflow is down and this blog showed up on Google (that&rsquo;s ambitious), skip to the next section.</p>
+
+<p>I never felt the desire to write a blog before The Flatiron School, where student blogs are required.  There are so many blogs, and writing another just seems to me like a drop in the bucket.  And the bucket is more like a reservoir.  There&rsquo;s a lot of great blogs on the internet, and a lot of crappy ones.  And between them, it seems to me like everything of interest has already been written and re-written.  For instance, while researching how Procs work, I found two excellent posts from <a href="http://www.skorks.com/2013/04/ruby-ampersand-parameter-demystified/">skorks.com</a> and <a href="http://www.iain.nl/going-crazy-with-to_proc">iain.nl</a>.  Really, those posts are much better written than this one will be, and I heartily encourage anyone reading this (if there is anyone reading this) to check those out first.  Effectively I&rsquo;m just rehashing what I learned from those blogs.</p>
+
+<p>So why blog?  Well, for selfish reasons.  Writing my last two blog posts really helped me understand the concepts I was writing about, much like explaining your code to someone else helps you understand as well.  So maybe this won&rsquo;t help anyone but myself, but as long as Github Pages are free, I&rsquo;ll probably keep writing for a while.  This is the reasoning for the subtitle of this blog: at the end of the day, it does feel like I&rsquo;m just talking to myself, explaining things to nobody.</p>
+
+<p>Alright, that&rsquo;s enough of that.  On to the actual post.</p>
+
+<h2>Ok, Procs</h2>
+
+<p>Put simply, a Proc is a block object.  That is, you can assign a Proc to a variable and re-use it.  blocks are one of the few non-object elements in the Ruby language, and Procs are used to remedy this.</p>
+
+<p><code>ruby
+a_block = { |x| x + 1 }          #=&gt; Syntax Error!
+a_proc = Proc.new { |x| x + 1 }  #=&gt; Success!
+[1, 2, 3].map(&amp;a_proc)           #=&gt; [2, 3, 4]
+</code></p>
+
+<p>That ampersand before a method argument (in this case, <code>a_proc</code>) is used to explicitly convert the method argument to a Proc.  In this example, the conversion is not necessary, but the ampersand is <em>still required.</em></p>
+
+<p>Procs are also used in method definitions, to assign a variable to whatever block is passed to the method.  This is incredibly useful when you want to re-use the block within the method body.</p>
+
+<p>Here&rsquo;s an example lovingly stolen from my Flatiron classmate <a href="http://bajh.github.io/">Brandon Hopkins</a>.  This is the <code>each</code> method from a Binary Search Tree implementation, which performs an in-order traversal of the tree:</p>
+
+<p>```ruby
+def each(&amp;block)
+  if self.left</p>
+
+<pre><code>self.left.each(&amp;block)
+</code></pre>
+
+<p>  end
+  block.call(data)
+  if self.right</p>
+
+<pre><code>self.right.each(&amp;block)
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>The method takes a block, which is converted to a Proc and assigned to the variable <code>block</code>.  <code>block</code> is called with <code>data</code> (the value at this node of the BST) and reused for the <code>each</code> method of both the <code>left</code> and <code>right</code> sub-trees of the BST.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The (&amp;:) syntactic sugar]]></title>

@@ -102,6 +102,98 @@ $(document).ready(
     <article class="post">
 	<h2 class="title">
 		
+		<a href="/blog/2014/07/08/between-a-proc-and-a-hard-place/">
+		
+			Between a Proc and a Hard Place</a>
+	</h2>
+	<div class="entry-content">
+		<p>Before I get into talking about Procs, I should address something.  If you came here because StackOverflow is down and this blog showed up on Google (that&rsquo;s ambitious), skip to the next section.</p>
+
+<p>I never felt the desire to write a blog before The Flatiron School, where student blogs are required.  There are so many blogs, and writing another just seems to me like a drop in the bucket.  And the bucket is more like a reservoir.  There&rsquo;s a lot of great blogs on the internet, and a lot of crappy ones.  And between them, it seems to me like everything of interest has already been written and re-written.  For instance, while researching how Procs work, I found two excellent posts from <a href="http://www.skorks.com/2013/04/ruby-ampersand-parameter-demystified/">skorks.com</a> and <a href="http://www.iain.nl/going-crazy-with-to_proc">iain.nl</a>.  Really, those posts are much better written than this one will be, and I heartily encourage anyone reading this (if there is anyone reading this) to check those out first.  Effectively I&rsquo;m just rehashing what I learned from those blogs.</p>
+
+<p>So why blog?  Well, for selfish reasons.  Writing my last two blog posts really helped me understand the concepts I was writing about, much like explaining your code to someone else helps you understand as well.  So maybe this won&rsquo;t help anyone but myself, but as long as Github Pages are free, I&rsquo;ll probably keep writing for a while.  This is the reasoning for the subtitle of this blog: at the end of the day, it does feel like I&rsquo;m just talking to myself, explaining things to nobody.</p>
+
+<p>Alright, that&rsquo;s enough of that.  On to the actual post.</p>
+
+<h2>Ok, Procs</h2>
+
+<p>Put simply, a Proc is a block object.  That is, you can assign a Proc to a variable and re-use it.  blocks are one of the few non-object elements in the Ruby language, and Procs are used to remedy this.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a_block</span> <span class="o">=</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">}</span>          <span class="c1">#=&gt; Syntax Error!</span>
+</span><span class='line'><span class="n">a_proc</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">}</span>  <span class="c1">#=&gt; Success!</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a_proc</span><span class="p">)</span>           <span class="c1">#=&gt; [2, 3, 4]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That ampersand before a method argument (in this case, <code>a_proc</code>) is used to explicitly convert the method argument to a Proc.  In this example, the conversion is not necessary, but the ampersand is <em>still required.</em></p>
+
+<p>Procs are also used in method definitions, to assign a variable to whatever block is passed to the method.  This is incredibly useful when you want to re-use the block within the method body.</p>
+
+<p>Here&rsquo;s an example lovingly stolen from my Flatiron classmate <a href="http://bajh.github.io/">Brandon Hopkins</a>.  This is the <code>each</code> method from a Binary Search Tree implementation, which performs an in-order traversal of the tree:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">left</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">block</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">right</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The method takes a block, which is converted to a Proc and assigned to the variable <code>block</code>.  <code>block</code> is called with <code>data</code> (the value at this node of the BST) and reused for the <code>each</code> method of both the <code>left</code> and <code>right</code> sub-trees of the BST.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-08T12:50:36-04:00" pubdate data-updated="true">Jul 8<span>th</span>, 2014</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/blocks/'>Blocks</a>, <a class='category' href='/blog/categories/procs/'>Procs</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+</div>
+
+
+	
+		<span class="comments"><a href="/blog/2014/07/08/between-a-proc-and-a-hard-place//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
 		<a href="/blog/2014/06/25/the-and-syntactic-sugar/">
 		
 			The (&amp;:) Syntactic Sugar</a>

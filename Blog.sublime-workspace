@@ -35,22 +35,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "_config.yml",
-			"settings":
-			{
-				"buffer_size": 2920,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "source/_layouts/post.html",
-			"settings":
-			{
-				"buffer_size": 426,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -136,9 +120,16 @@
 	},
 	"file_history":
 	[
+		"/Users/pglennon/flatiron/octopress/_config.yml",
+		"/Users/pglennon/flatiron/octopress/Rakefile",
+		"/Users/pglennon/flatiron/octopress/source/_posts/2014-06-25-the-and-syntactic-sugar.markdown",
+		"/Users/pglennon/flatiron/octopress/source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown",
+		"/Users/pglennon/flatiron/octopress/.sass-cache/a252d5aeab4e56b0d223e6b19d4487f9d529f54a/_syntax.scssc",
+		"/Users/pglennon/flatiron/octopress/sass/screen.scss",
+		"/Users/pglennon/flatiron/octopress/source/_layouts/post.html",
+		"/Users/pglennon/flatiron/octopress/.pygments-cache/ruby-a488833a025992a8639021002db6012d.html",
 		"/Users/pglennon/flatiron/octopress/_deploy/index.html",
 		"/Users/pglennon/flatiron/octopress/_deploy/blog/index.html",
-		"/Users/pglennon/flatiron/octopress/source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown",
 		"/Users/pglennon/flatiron/octopress/_deploy/stylesheets/style.css",
 		"/Users/pglennon/flatiron/octopress/sass/plugins/_fancybox.scss",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/af636dd7885666a65ea6afb8e97ab768ca010577/_fancybox.scssc",
@@ -174,7 +165,6 @@
 		"/Users/pglennon/flatiron/octopress/.sass-cache/73bc41c852cd457ea2d2aef52ce84f5c2d2b052c/_plugins.scssc",
 		"/Users/pglennon/flatiron/octopress/sass/_plugins.scss",
 		"/Users/pglennon/flatiron/octopress/plugins/pagination.rb",
-		"/Users/pglennon/flatiron/octopress/sass/screen.scss",
 		"/Users/pglennon/flatiron/octopress/_deploy/sitemap.xml",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/7671205d720c2fd6df27f633e5593b119f205b7e/_css3.scssc",
 		"/Users/pglennon/flatiron/octopress/.sass-cache/0b485577bf632a4891b2f61dc31d98db903c21e9/_clearfix.scssc",
@@ -194,7 +184,6 @@
 		"/Users/pglennon/flatiron/octopress/config.ru",
 		"/Users/pglennon/flatiron/octopress/config.rb",
 		"/Users/pglennon/flatiron/octopress/CHANGELOG.markdown",
-		"/Users/pglennon/flatiron/octopress/_config.yml",
 		"/Users/pglennon/flatiron/week_2/collections_practice-ruby-005/spec/collections_practice_spec.rb",
 		"/Users/pglennon/flatiron/week_2/collections_practice-ruby-005/collections_practice.rb",
 		"/Users/pglennon/flatiron/week_2/green_grocer-ruby-005/grocer.rb",
@@ -258,12 +247,7 @@
 		"/Users/pglennon/week_1/badges-and-schedules-ruby-005/conference_badges.rb",
 		"/Users/pglennon/.emacs",
 		"/Users/pglennon/.rspec",
-		"/Users/pglennon/week_1/clmystery-ruby-005/README.md",
-		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/memberships/Museum_of_Bash_History",
-		"/Users/pglennon/week_1/ruby-vowels-ruby-005/ruby_vowels.rb",
-		"/Users/pglennon/week_1/clmystery-ruby-005/mystery/vehicles",
-		"/Users/pglennon/week_1/parrot-ruby-ruby-005/parrot.rb",
-		"/Users/pglennon/week_1/rspec-fizzbuzz-ruby-005/spec/fizzbuzz_spec.rb"
+		"/Users/pglennon/week_1/clmystery-ruby-005/README.md"
 	],
 	"find":
 	{
@@ -341,267 +325,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "_config.yml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2920,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								117,
-								117
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"SideBarAutoAddFoldersForOpenedFiles": 1,
-							"bh_regions":
-							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close"
-							],
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": false,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"sublime_auto_complete": true,
-							"syntax": "Packages/YAML/YAML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "source/_layouts/post.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 426,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								47,
-								47
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"SideBarAutoAddFoldersForOpenedFiles": 1,
-							"bh_regions":
-							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close"
-							],
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -656,6 +381,18 @@
 		"selected_items":
 		[
 			[
+				"2014",
+				"source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown"
+			],
+			[
+				"syntactic",
+				"source/_posts/2014-06-25-the-and-syntactic-sugar-and-why-im-explaining-things-to-a-vacuum.markdown"
+			],
+			[
+				"rake",
+				"Rakefile"
+			],
+			[
 				"fancy",
 				"sass/plugins/_fancybox.scss"
 			],
@@ -669,10 +406,6 @@
 			],
 			[
 				"20",
-				"source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown"
-			],
-			[
-				"2014",
 				"source/_posts/2014-06-10-rubys-hash-dot-new-and-{}.markdown"
 			],
 			[

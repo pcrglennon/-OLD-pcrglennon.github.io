@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Sinatra | Peter Glennon]]></title>
+  <link href="http://pcrglennon.github.io/blog/categories/sinatra/atom.xml" rel="self"/>
+  <link href="http://pcrglennon.github.io/"/>
+  <updated>2014-07-25T09:50:39-04:00</updated>
+  <id>http://pcrglennon.github.io/</id>
+  <author>
+    <name><![CDATA[Peter Glennon]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Starting a new Sinatra App from Scratch]]></title>
+    <link href="http://pcrglennon.github.io/blog/2014/07/20/starting-a-new-sinatra-app-from-scratch/"/>
+    <updated>2014-07-20T13:49:52-04:00</updated>
+    <id>http://pcrglennon.github.io/blog/2014/07/20/starting-a-new-sinatra-app-from-scratch</id>
+    <content type="html"><![CDATA[<p>My friend <a href="https://github.com/jusjmkim">Justin</a> and I are working on a small app to present at The Flatiron School in two weeks.  The app itself isn&rsquo;t hugely interesting: we&rsquo;re basically allowing a user to save a point on a Google Map and share it.  And really, that&rsquo;s just repeating some functionality of Google Maps itself.</p>
+
+<p>Since the app will be relatively small and simple, we decided to use Sinatra instead of Rails.  One of the more interesting challenges we&rsquo;ve faced so far is setting up the framework of the app itself.  It&rsquo;s easy to get used to all the scaffolding you get by just typing <code>rails new</code>.  Starting from an empty folder was really a project in itself, when you haven&rsquo;t done it before.</p>
+
+<p>Of course, there are a number of apps which set up the structure of a barebones Sinatra app (such as <a href="https://github.com/maccman/trevi">Trevi</a> or <a href="https://github.com/c7/hazel">Hazel</a>), but we decided to do it by hand.</p>
+
+<p>Here&rsquo;s what we did, in a very rough order:</p>
+
+<h3>Gemfile:</h3>
+
+<p>I don&rsquo;t think I had ever created a Gemfile before.  I always relied on it just&hellip;being there.  Fortunately, <a href="http://bundler.io/">Bundler</a> has quick setup instructions right on its homepage.</p>
+
+<p>Setting up the Gemfile by hand also forced Justin and I to make decisions about what we REALLY needed for our app.  We chose to do without ActiveRecord, as the app will only have one table and maybe 5-6 SQL queries all told.  In a similar vein, we had to stop and think about which gems are needed in which environment.</p>
+
+<h3>Environment file/Configuration file:</h3>
+
+<p>Getting everything to work together was definitely the most difficult part.  Again, I&rsquo;m used to a Rails app, where it just works right away.  We had to go back to old exercises from Flatiron to set up the <code>environment.rb</code> file.</p>
+
+<p>Step 1: Ensure there is a variable set (in ruby&rsquo;s global <code>ENV</code> hash) which represents which environment to use.  Default to &lsquo;environment&rsquo;.  i.e. something like `ENV[&ldquo;SINATRA_ENV&rdquo;] ||= &lsquo;development&rsquo;.  <strong>Note:</strong> we have yet to deploy this to production, so it&rsquo;s possible this won&rsquo;t be enough.</p>
+
+<p>Step 2: Require bundler, and use it to require all gems for the environment in use.</p>
+
+<p><code>ruby
+require 'bundler'
+Bundler.require(:default, ENV['SINATRA_ENV'])
+</code></p>
+
+<p>Step 3: Set up the DB connection (if using a DB, that is).  We used SQLite3, again for simplicity.</p>
+
+<p><code>ruby
+DB = {:conn =&gt; SQLite3::Database.new("./db/your_db.db")}
+</code></p>
+
+<p>Step 4: Requiring your Ruby source files.  In this tiny project, we really only had one file to require (the &lsquo;Map&rsquo; model which stores a name and a coordinate), so this was easy.  In a larger project, it would be best to use something like <a href="https://github.com/jarmo/require_all">require_all</a>.</p>
+
+<p>Step 5: Other configuration options. For us, we had to set up a file to store our Google Maps API key, and make sure that key is accessible by the application.  We used the common pattern of creating a file <code>config.yml</code> which we don&rsquo;t track in version control (not wanting to expose our key to the world!), and loading configuration options using Sinatra&rsquo;s <code>set</code>.</p>
+
+<p>```ruby
+configure do
+  yaml = YAML.load_file(&ldquo;config/config.yml&rdquo;)[settings.environment.to_s]
+  yaml.each_pair do |key, value|</p>
+
+<pre><code>set(key.to_sym, value)
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h3>The Sinatra App and config.ru</h3>
+
+<p>And of course, we need an actual Sinatra Application, and a means of running it!  There are (at the moment) only 3 routes needed, so we bundled them all into a file called <code>app.rb</code>, which lives in our root folder.  That app does 3 things:</p>
+
+<ol>
+<li><code>require /.config/environment</code></li>
+<li>Extend <code>Sinatra:Base</code></li>
+<li>Set up route handlers.  In our case, this is just <code>get '/'</code>, &lsquo;<code>post '/'</code>, and <code>get '/:map_name'</code>.</li>
+</ol>
+
+
+<p>In order to run this app, all we have to do to is set up the <code>config.ru</code> file.  Once again, thanks to the simplicity of our app, this is easy.  Only two lines:</p>
+
+<p><code>ruby
+require './app'
+run App
+</code></p>
+
+<p>Run <code>rackup</code> in your terminal, point your browser to localhost:9292, and you&rsquo;re good to go!</p>
+]]></content>
+  </entry>
+  
+</feed>

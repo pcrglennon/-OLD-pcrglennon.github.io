@@ -1,0 +1,265 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
+	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<meta charset="utf-8">
+	<title>Starting a new Sinatra App from Scratch  | Peter Glennon</title>
+
+<meta name="author" content="Peter Glennon"> 
+
+<meta name="description" content="Ruby, Flatiron School, Programming"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Peter Glennon" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js"></script>
+
+<script language="Javascript" type="text/javascript">
+$(document).ready(
+  function() {
+    (function($) {
+      $(".fancybox[data-content-id]").each(function() {
+        this.href = $(this).data('content-id');
+      });
+      $(".fancybox").fancybox({
+        beforeLoad: function() {
+          var el, 
+              id = $(this.element).data('title-id');
+
+          if (id) {
+            el = $('#' + id);
+
+            if (el.length) {
+              this.title = el.html();
+            }
+          }
+          if ($(this).data('content')) {
+            this.content = $(this).data('content');
+          }
+        },
+        helpers: {
+          title: {
+            type: 'inside'
+          }
+        }
+      });
+    })(jQuery);
+  }
+);
+</script>
+
+	
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Peter Glennon</a></h1>
+<h4>Explaining things to a vacuum</h4>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:pcrglennon.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Starting a New Sinatra App From Scratch</h2>
+	<div class="entry-content"><p>My friend <a href="https://github.com/jusjmkim">Justin</a> and I are working on a small app to present at The Flatiron School in two weeks.  The app itself isn&rsquo;t hugely interesting: we&rsquo;re basically allowing a user to save a point on a Google Map and share it.  And really, that&rsquo;s just repeating some functionality of Google Maps itself.</p>
+
+<p>Since the app will be relatively small and simple, we decided to use Sinatra instead of Rails.  One of the more interesting challenges we&rsquo;ve faced so far is setting up the framework of the app itself.  It&rsquo;s easy to get used to all the scaffolding you get by just typing <code>rails new</code>.  Starting from an empty folder was really a project in itself, when you haven&rsquo;t done it before.</p>
+
+<p>Of course, there are a number of apps which set up the structure of a barebones Sinatra app (such as <a href="https://github.com/maccman/trevi">Trevi</a> or <a href="https://github.com/c7/hazel">Hazel</a>), but we decided to do it by hand.</p>
+
+<p>Here&rsquo;s what we did, in a very rough order:</p>
+
+<h3>Gemfile:</h3>
+
+<p>I don&rsquo;t think I had ever created a Gemfile before.  I always relied on it just&hellip;being there.  Fortunately, <a href="http://bundler.io/">Bundler</a> has quick setup instructions right on its homepage.</p>
+
+<p>Setting up the Gemfile by hand also forced Justin and I to make decisions about what we REALLY needed for our app.  We chose to do without ActiveRecord, as the app will only have one table and maybe 5-6 SQL queries all told.  In a similar vein, we had to stop and think about which gems are needed in which environment.</p>
+
+<h3>Environment file/Configuration file:</h3>
+
+<p>Getting everything to work together was definitely the most difficult part.  Again, I&rsquo;m used to a Rails app, where it just works right away.  We had to go back to old exercises from Flatiron to set up the <code>environment.rb</code> file.</p>
+
+<p>Step 1: Ensure there is a variable set (in ruby&rsquo;s global <code>ENV</code> hash) which represents which environment to use.  Default to &lsquo;environment&rsquo;.  i.e. something like `ENV[&ldquo;SINATRA_ENV&rdquo;] ||= &lsquo;development&rsquo;.  <strong>Note:</strong> we have yet to deploy this to production, so it&rsquo;s possible this won&rsquo;t be enough.</p>
+
+<p>Step 2: Require bundler, and use it to require all gems for the environment in use.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;bundler&#39;</span>
+</span><span class='line'><span class="no">Bundler</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:default</span><span class="p">,</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;SINATRA_ENV&#39;</span><span class="o">]</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Step 3: Set up the DB connection (if using a DB, that is).  We used SQLite3, again for simplicity.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">DB</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:conn</span> <span class="o">=&gt;</span> <span class="ss">SQLite3</span><span class="p">:</span><span class="ss">:Database</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;./db/your_db.db&quot;</span><span class="p">)}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Step 4: Requiring your Ruby source files.  In this tiny project, we really only had one file to require (the &lsquo;Map&rsquo; model which stores a name and a coordinate), so this was easy.  In a larger project, it would be best to use something like <a href="https://github.com/jarmo/require_all">require_all</a>.</p>
+
+<p>Step 5: Other configuration options. For us, we had to set up a file to store our Google Maps API key, and make sure that key is accessible by the application.  We used the common pattern of creating a file <code>config.yml</code> which we don&rsquo;t track in version control (not wanting to expose our key to the world!), and loading configuration options using Sinatra&rsquo;s <code>set</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">configure</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">yaml</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;config/config.yml&quot;</span><span class="p">)</span><span class="o">[</span><span class="n">settings</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">to_s</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">yaml</span><span class="o">.</span><span class="n">each_pair</span> <span class="k">do</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">to_sym</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>The Sinatra App and config.ru</h3>
+
+<p>And of course, we need an actual Sinatra Application, and a means of running it!  There are (at the moment) only 3 routes needed, so we bundled them all into a file called <code>app.rb</code>, which lives in our root folder.  That app does 3 things:</p>
+
+<ol>
+<li><code>require /.config/environment</code></li>
+<li>Extend <code>Sinatra:Base</code></li>
+<li>Set up route handlers.  In our case, this is just <code>get '/'</code>, &lsquo;<code>post '/'</code>, and <code>get '/:map_name'</code>.</li>
+</ol>
+
+
+<p>In order to run this app, all we have to do to is set up the <code>config.ru</code> file.  Once again, thanks to the simplicity of our app, this is easy.  Only two lines:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;./app&#39;</span>
+</span><span class='line'><span class="n">run</span> <span class="no">App</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run <code>rackup</code> in your terminal, point your browser to localhost:9292, and you&rsquo;re good to go!</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-20T13:49:52-04:00" pubdate data-updated="true">Jul 20<span>th</span>, 2014</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/bootstrapping/'>Bootstrapping</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a>
+
+</div>
+
+
+	
+		<span class="comments"><a href="/blog/2014/07/20/starting-a-new-sinatra-app-from-scratch/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+<!---	<a class="addthis_counter addthis_pill_style"></a> --->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Peter Glennon
+
+<br>
+Powered by Octopress.
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'pcrglennon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pcrglennon.github.io/blog/2014/07/20/starting-a-new-sinatra-app-from-scratch/';
+        var disqus_url = 'http://pcrglennon.github.io/blog/2014/07/20/starting-a-new-sinatra-app-from-scratch/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>

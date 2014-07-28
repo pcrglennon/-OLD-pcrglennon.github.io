@@ -41,7 +41,15 @@ DB = {:conn => SQLite3::Database.new("./db/your_db.db")}
 
 Step 4: Requiring your Ruby source files.  In this tiny project, we really only had one file to require (the 'Map' model which stores a name and a coordinate), so this was easy.  In a larger project, it would be best to use something like [require_all](https://github.com/jarmo/require_all).
 
-Step 5: Other configuration options. For us, we had to set up a file to store our Google Maps API key, and make sure that key is accessible by the application.  We used the common pattern of creating a file `config.yml` which we don't track in version control (not wanting to expose our key to the world!), and loading configuration options using Sinatra's `set`.
+
+###The Sinatra App and config.ru
+
+And of course, we need an actual Sinatra Application, and a means of running it!  There are (at the moment) only 3 routes needed, so we bundled them all into a file called `app.rb`, which lives in our root folder.  That app does 4 things:
+
+1. `require /.config/environment`.  Duh.
+2. Extend `Sinatra:Base`
+3. Set up route handlers.  In our case, this is just `get '/'`, '`post '/'`, and `get '/:map_name'`.
+4. Other configuration options. For us, we had to set up a file to store our Google Maps API key, and make sure that key is accessible by the application.  We used the common pattern of creating a file `config.yml` which we don't track in version control (not wanting to expose our key to the world!), and loading configuration options using Sinatra's `set`.
 
 ```ruby
 configure do
@@ -51,15 +59,6 @@ configure do
   end
 end
 ```
-
-###The Sinatra App and config.ru
-
-And of course, we need an actual Sinatra Application, and a means of running it!  There are (at the moment) only 3 routes needed, so we bundled them all into a file called `app.rb`, which lives in our root folder.  That app does 3 things:
-
-1. `require /.config/environment`
-2. Extend `Sinatra:Base`
-3. Set up route handlers.  In our case, this is just `get '/'`, '`post '/'`, and `get '/:map_name'`.
-
 In order to run this app, all we have to do to is set up the `config.ru` file.  Once again, thanks to the simplicity of our app, this is easy.  Only two lines:
 
 ```ruby

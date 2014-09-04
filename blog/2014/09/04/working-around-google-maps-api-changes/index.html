@@ -1,0 +1,205 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
+	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<meta charset="utf-8">
+	<title>Working around Google Maps API changes  | Peter Glennon</title>
+
+<meta name="author" content="Peter Glennon"> 
+
+<meta name="description" content="Ruby, Rails, Javascript, Flatiron School, Programming"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Peter Glennon" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js"></script>
+
+<script language="Javascript" type="text/javascript">
+$(document).ready(
+  function() {
+    (function($) {
+      $(".fancybox[data-content-id]").each(function() {
+        this.href = $(this).data('content-id');
+      });
+      $(".fancybox").fancybox({
+        beforeLoad: function() {
+          var el, 
+              id = $(this.element).data('title-id');
+
+          if (id) {
+            el = $('#' + id);
+
+            if (el.length) {
+              this.title = el.html();
+            }
+          }
+          if ($(this).data('content')) {
+            this.content = $(this).data('content');
+          }
+        },
+        helpers: {
+          title: {
+            type: 'inside'
+          }
+        }
+      });
+    })(jQuery);
+  }
+);
+</script>
+
+	
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Peter Glennon</a></h1>
+<h4>Writing 'bout code on the Internet</h4>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="https://github.com/pcrglennon">Github</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="https://github.com/pcrglennon">Github</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:pcrglennon.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Working Around Google Maps API Changes</h2>
+	<div class="entry-content"><p>A few days before the Flatiron School Science Fair, where we were to demo what we&rsquo;ve built to potential employers, a classmate noticed the Google Maps aspect of their app was hopelessly broken.  And then someone else&rsquo;s app had broken.  And then mine had as well.</p>
+
+<h3>geometry.location.K refers to latitude, naturally!</h3>
+
+<p>In my first experiences with the Maps API, I relied on the structure of the JSON response from the API instead of reading the documentation like I should have.  From looking into the response, the variable that contained a coordinate&rsquo;s longitude seemed to be named <code>K</code>, and the latitude variable was named <code>a</code>.  I thought this was weird, but was in a rush to get Maps working, so I just wrote something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">latitude</span> <span class="o">=</span> <span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">geometry</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">a</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that worked, until it didn&rsquo;t.  The bug that crashed every Flatiron app that used Google Maps boiled down to this: the reponse now referred to longitude as <code>b</code>, instead of <code>a</code>.  What the hell?  I was too busy at the time to think about why that should happen, so just changed my code to use <code>b</code> instead.</p>
+
+<p>Fortunately, that fix held through the Science Fair, but broke again a few days later!  After some discussion with classmates, we found a <a href="http://stackoverflow.com/questions/13499111/google-maps-geocoder-geocode-geometry-location-lat-lng-property-names-change-f">StackOverflow question</a> with a near-identical issue.  The solution was to use the <code>latitude()</code> and <code>longitude()</code> methods of the Google Maps <code>LatLng</code> object, instead of the arbitrarily-named variables <code>a</code>, <code>b</code>, <code>K</code>, etc. which appear to change frequently and without warning.</p>
+
+<p>After looking back over the docs for the <a href="https://developers.google.com/maps/documentation/javascript/reference#LatLng">Maps API</a>, it turns out those methods were both documented.  So my classmates and I could have avoided the whole issue by following that classic four-letter piece of advice: RTFM.</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-04T15:54:50-04:00" pubdate data-updated="true">Sep 4<span>th</span>, 2014</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/google-maps-api-v3/'>Google&nbsp;Maps&nbsp;API&nbsp;V3</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/rtfm/'>RTFM</a>
+
+</div>
+
+
+	
+		<span class="comments"><a href="/blog/2014/09/04/working-around-google-maps-api-changes/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+<!---	<a class="addthis_counter addthis_pill_style"></a> --->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Peter Glennon
+
+<br>
+Powered by Octopress.
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'pcrglennon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pcrglennon.github.io/blog/2014/09/04/working-around-google-maps-api-changes/';
+        var disqus_url = 'http://pcrglennon.github.io/blog/2014/09/04/working-around-google-maps-api-changes/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>

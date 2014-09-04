@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Google&nbsp;Maps&nbsp;API&nbsp;V3 | Peter Glennon]]></title>
+  <link href="http://pcrglennon.github.io/blog/categories/google-maps-api-v3/atom.xml" rel="self"/>
+  <link href="http://pcrglennon.github.io/"/>
+  <updated>2014-09-04T16:22:39-04:00</updated>
+  <id>http://pcrglennon.github.io/</id>
+  <author>
+    <name><![CDATA[Peter Glennon]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Working around Google Maps API changes]]></title>
+    <link href="http://pcrglennon.github.io/blog/2014/09/04/working-around-google-maps-api-changes/"/>
+    <updated>2014-09-04T15:54:50-04:00</updated>
+    <id>http://pcrglennon.github.io/blog/2014/09/04/working-around-google-maps-api-changes</id>
+    <content type="html"><![CDATA[<p>A few days before the Flatiron School Science Fair, where we were to demo what we&rsquo;ve built to potential employers, a classmate noticed the Google Maps aspect of their app was hopelessly broken.  And then someone else&rsquo;s app had broken.  And then mine had as well.</p>
+
+<h3>geometry.location.K refers to latitude, naturally!</h3>
+
+<p>In my first experiences with the Maps API, I relied on the structure of the JSON response from the API instead of reading the documentation like I should have.  From looking into the response, the variable that contained a coordinate&rsquo;s longitude seemed to be named <code>K</code>, and the latitude variable was named <code>a</code>.  I thought this was weird, but was in a rush to get Maps working, so I just wrote something like this:</p>
+
+<p><code>javascript
+var latitude = results[0].geometry.location.a;
+</code></p>
+
+<p>And that worked, until it didn&rsquo;t.  The bug that crashed every Flatiron app that used Google Maps boiled down to this: the reponse now referred to longitude as <code>b</code>, instead of <code>a</code>.  What the hell?  I was too busy at the time to think about why that should happen, so just changed my code to use <code>b</code> instead.</p>
+
+<p>Fortunately, that fix held through the Science Fair, but broke again a few days later!  After some discussion with classmates, we found a <a href="http://stackoverflow.com/questions/13499111/google-maps-geocoder-geocode-geometry-location-lat-lng-property-names-change-f">StackOverflow question</a> with a near-identical issue.  The solution was to use the <code>latitude()</code> and <code>longitude()</code> methods of the Google Maps <code>LatLng</code> object, instead of the arbitrarily-named variables <code>a</code>, <code>b</code>, <code>K</code>, etc. which appear to change frequently and without warning.</p>
+
+<p>After looking back over the docs for the <a href="https://developers.google.com/maps/documentation/javascript/reference#LatLng">Maps API</a>, it turns out those methods were both documented.  So my classmates and I could have avoided the whole issue by following that classic four-letter piece of advice: RTFM.</p>
+]]></content>
+  </entry>
+  
+</feed>

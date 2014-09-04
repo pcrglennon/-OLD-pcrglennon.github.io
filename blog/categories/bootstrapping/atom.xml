@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bootstrapping | Peter Glennon]]></title>
   <link href="http://pcrglennon.github.io/blog/categories/bootstrapping/atom.xml" rel="self"/>
   <link href="http://pcrglennon.github.io/"/>
-  <updated>2014-07-25T09:50:39-04:00</updated>
+  <updated>2014-09-04T15:08:26-04:00</updated>
   <id>http://pcrglennon.github.io/</id>
   <author>
     <name><![CDATA[Peter Glennon]]></name>
@@ -53,7 +53,17 @@ DB = {:conn =&gt; SQLite3::Database.new("./db/your_db.db")}
 
 <p>Step 4: Requiring your Ruby source files.  In this tiny project, we really only had one file to require (the &lsquo;Map&rsquo; model which stores a name and a coordinate), so this was easy.  In a larger project, it would be best to use something like <a href="https://github.com/jarmo/require_all">require_all</a>.</p>
 
-<p>Step 5: Other configuration options. For us, we had to set up a file to store our Google Maps API key, and make sure that key is accessible by the application.  We used the common pattern of creating a file <code>config.yml</code> which we don&rsquo;t track in version control (not wanting to expose our key to the world!), and loading configuration options using Sinatra&rsquo;s <code>set</code>.</p>
+<h3>The Sinatra App and config.ru</h3>
+
+<p>And of course, we need an actual Sinatra Application, and a means of running it!  There are (at the moment) only 3 routes needed, so we bundled them all into a file called <code>app.rb</code>, which lives in our root folder.  That app does 4 things:</p>
+
+<ol>
+<li><code>require /.config/environment</code>.  Duh.</li>
+<li>Extend <code>Sinatra:Base</code></li>
+<li>Set up route handlers.  In our case, this is just <code>get '/'</code>, &lsquo;<code>post '/'</code>, and <code>get '/:map_name'</code>.</li>
+<li>Other configuration options. For us, we had to set up a file to store our Google Maps API key, and make sure that key is accessible by the application.  We used the common pattern of creating a file <code>config.yml</code> which we don&rsquo;t track in version control (not wanting to expose our key to the world!), and loading configuration options using Sinatra&rsquo;s <code>set</code>.</li>
+</ol>
+
 
 <p>```ruby
 configure do
@@ -65,20 +75,8 @@ configure do
 
 <p>  end
 end
-```</p>
-
-<h3>The Sinatra App and config.ru</h3>
-
-<p>And of course, we need an actual Sinatra Application, and a means of running it!  There are (at the moment) only 3 routes needed, so we bundled them all into a file called <code>app.rb</code>, which lives in our root folder.  That app does 3 things:</p>
-
-<ol>
-<li><code>require /.config/environment</code></li>
-<li>Extend <code>Sinatra:Base</code></li>
-<li>Set up route handlers.  In our case, this is just <code>get '/'</code>, &lsquo;<code>post '/'</code>, and <code>get '/:map_name'</code>.</li>
-</ol>
-
-
-<p>In order to run this app, all we have to do to is set up the <code>config.ru</code> file.  Once again, thanks to the simplicity of our app, this is easy.  Only two lines:</p>
+<code>``
+In order to run this app, all we have to do to is set up the</code>config.ru` file.  Once again, thanks to the simplicity of our app, this is easy.  Only two lines:</p>
 
 <p><code>ruby
 require './app'

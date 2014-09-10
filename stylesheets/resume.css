@@ -58,7 +58,7 @@ a#pdf:hover { background: #222; }
 .job, .project, .education { position: relative; margin-bottom: 1.2em; padding-bottom: 1.4em; border-bottom: 1px solid #ccc; }
 .job p, .project p, .education p { margin: 0.4em 0 0 0; }
 .job h2, .project h2, .education h2 { font-size: 172%; }
-.job h3, .project h3, .education h3 { font-size: 145%; margin-top: 3px; }
+.job h3, .project h3, .education h3 { font-size: 135%; margin-top: 3px; }
 .job h4, .project h4, .education h4 { position: absolute; top: 0.35em; right: 0; margin-right: 20px; }
 
 .last { border: none; }

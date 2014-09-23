@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github&nbsp;Pages | Peter Glennon]]></title>
   <link href="http://pcrglennon.github.io/blog/categories/github-pages/atom.xml" rel="self"/>
   <link href="http://pcrglennon.github.io/"/>
-  <updated>2014-09-23T13:02:44-04:00</updated>
+  <updated>2014-09-23T16:44:17-04:00</updated>
   <id>http://pcrglennon.github.io/</id>
   <author>
     <name><![CDATA[Peter Glennon]]></name>
@@ -32,6 +32,10 @@
 
 
 <p>And now, the contents of <code>index.html</code> will be available on <code>[your-github-site]/[repo-name]</code>.  It can take a while to register the changes.  The docs say up to 15 minutes, but for me it&rsquo;s usually done in less than a minute.</p>
+
+<h3>Running as a local server</h3>
+
+<p>So that deployed the app to the Github Pages app, but I still need a local server for development.  Fortunately, if you use Ruby, it&rsquo;s simple!  All you need is to setup a Gemfile, add <code>gem 'github-pages'</code>, <code>bundle install</code>, and finally <code>bundle exec jekyll serve</code>.  Now there&rsquo;s a basic local server running at localhost:4000.  I&rsquo;m sure this could get a lot more complicated, but that&rsquo;s all I need right now.</p>
 ]]></content>
   </entry>
   

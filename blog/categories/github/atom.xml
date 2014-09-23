@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Github | Peter Glennon]]></title>
+  <link href="http://pcrglennon.github.io/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://pcrglennon.github.io/"/>
+  <updated>2014-09-23T13:02:44-04:00</updated>
+  <id>http://pcrglennon.github.io/</id>
+  <author>
+    <name><![CDATA[Peter Glennon]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hosting a Repo on Github Pages]]></title>
+    <link href="http://pcrglennon.github.io/blog/2014/09/23/hosting-a-repo-on-github-pages/"/>
+    <updated>2014-09-23T12:07:35-04:00</updated>
+    <id>http://pcrglennon.github.io/blog/2014/09/23/hosting-a-repo-on-github-pages</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m building a small Backbone todo-list app (because there will never be enough of those!) as a learning exercise.  And I was running into difficulties when I started using the RequireJS text plugin; my browser was complaining about <code>Cross origin requests are only supported for HTTP</code> when running totally locally.  Looking into it, I discovered I needed to run on a local server, so I could serve everything over HTTP.  A friend had been telling me about hosting on github-pages, but I already had this blog app running on my gitub-hosted site.  Could I host the todo app as a sub-page on my site?</p>
+
+<h3>Github&rsquo;s Project Pages</h3>
+
+<p>Well, figuring out how to host multiple repos on a Github Pages site was absurdly easy.  <a href="https://help.github.com/articles/creating-project-pages-manually">Here&rsquo;s a link to the official Github documentaion</a>.  Those instructions are geared to hosting a simple static information site, but you can also use project pages to host an HTML/CSS/JS only application.  All you need to do is:</p>
+
+<ul>
+<li>Ensure you have an <code>index.html</code> page in your root directory</li>
+<li>Create an orphan branch named gh-pages: <code>git checkout --orphan gh-pages</code></li>
+<li><code>git push origin gh-pages</code></li>
+</ul>
+
+
+<p>And now, the contents of <code>index.html</code> will be available on <code>[your-github-site]/[repo-name]</code>.  It can take a while to register the changes.  The docs say up to 15 minutes, but for me it&rsquo;s usually done in less than a minute.</p>
+]]></content>
+  </entry>
+  
+</feed>
